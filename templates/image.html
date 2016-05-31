@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title >
+            Image Process
+        </title>
+        <script type="text/javascript" src = "{% static 'js/jquery-1.12.4.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'image.css' %}">
+        
+        <!--script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+
+    </head>
+
+
+    <body>
+
+        <div id = 'home'>
+            <!--button id = 'upload' class = 'btn btn-danger' >Upload</button>
+            <button id = 'url' class = 'btn btn-danger'>Url</button>
+            <button id = 'binary' >binary</button-->
+
+
+
+
+            <!--form action = 'upload_file' class='file-upload'  id = 'upload-form' enctype = 'multipart/form-data'>
+            
+                {% csrf_token %}
+                <input id = 'upload-btn' class = 'btn btn-danger' type = 'submit' value = 'Upload'>
+                <input id = 'upload-image' class = 'file-input' type = 'file' name = 'image'>
+
+           
+            </form-->
+
+            <form action = 'upload_file' id = 'upload-form2' enctype = 'multipart/form-data'> 
+                
+                {% csrf_token %}
+
+                <center><button id = 'upload-button' class = "file-upload btn btn-danger ">            
+                    <input id = 'upload-input' type="file" class="file-input" name = 'image'>Upload
+                </button></center>
+
+            </form>
+
+        </div>
+
+
+
+        <div id = 'process-area'>
+
+            <h1 id = 'filename'></h1>
+            <h1 id = 'current-version'></h1>
+            <p id = 'test'>xxxx</p>
+            
+            <h1> This is process - area </h1>
+
+            <div id = 'tool-bar'>
+
+                <div class="dropdown">
+                    <button class="dropbtn">File</button>
+                    <div class="dropdown-content">
+                        <p href="#">Download</p>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>  
+                </div>
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">tool</button>
+                    <div class="dropdown-content">
+                        <a id = 'binary'>Binary</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>  
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">undo</button>
+                    
+                </div>
+
+
+
+
+            </div>
+
+
+            <div id = 'image-area'>
+
+                <div id = 'original-image-area'>
+                   
+                    <!--img id = 'original-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img-->
+                </div>
+
+
+                <div id = 'processing-image-area'>
+                    
+                    <!--img id = 'processing-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img-->
+                </div>
+            </div>
+        </div>
+
+     
+
+     
+        
+        <script src = "{% static 'js/bootstrap.min.js' %}" async defer ></script>
+        <script src = "{% static 'image.js' %}" async defer ></script>
+        <script src = "{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
+        <script src = "{% static 'js/jquery.iframe-transport.js' %}"></script>
+        <script src = "{% static 'js/jquery.fileupload.js' %}"></script>
+
+
+    </body>
+    
+</html>

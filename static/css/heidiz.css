@@ -1,0 +1,18 @@
+#previous-page{
+    position : absolute;
+    background-color : red;
+    width : 50%;
+    height : 100%;
+    left : 0px;
+    
+}
+ 
+#next-page {
+    position : absolute;
+    background-color: green;
+    width : 50%;
+    height : 100%;
+    right : 0px;
+   
+}
+
