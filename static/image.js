@@ -1,16 +1,11 @@
 
-/* variable */
+/* Variable */
 
 var is_toggle = false
 
 var image
 
-var original_width
-
-var original_height
-
-
-/* function */
+/* Function */
 
 $('#binary').click(
 
@@ -37,59 +32,23 @@ $('#toggle').click(
 
     function(){
 
-        var width = $(window).width();
-        var height = $(window).height();
-
-
         if(is_toggle == false){
 
             $('#original-image').hide();
 
-            image = width / 3 * 2;
-
-            var right = (width / 2 - image / 2).toString().concat('px');
-            
-            $('#processing-image').css({
-
-                'position' : 'absolute',
-                'right' : right,
-                'width' : image,
-
-            });
-
             is_toggle = true;
+
+            refresh();
 
         }
 
         else if(is_toggle == true){
 
-            var center = width / 2;
-
-            image = width / 2.5
-
-            var axis = (center - image) / 3 * 2;
-
-            
-      
-            $('#original-image').css({
-
-                'position' : 'absolute',
-                'width' : image,
-                'left' : axis
-
-            })
-
             $('#original-image').show();
 
-            $('#processing-image').css({
-
-                'position' : 'absolute',
-                'width' : image,
-                'right' : axis
-
-            })
-
             is_toggle = false;
+
+            refresh();
         }
     })
 
@@ -97,50 +56,14 @@ $('#toggle').click(
 $(window).resize(function() {
 
     var width = $(window).width();
-    var height = $(window).height();
 
-    var right = (width / 2 - image / 2).toString().concat('px');
-
-    if (is_toggle == true){
-
-        $('#processing-image').css({    
-
-            'position' : 'absolute',
-            'right' : right,
-            'width' : image,
-
-        });
-    }
-
-    else{
-
-
-        var center = width / 2;
-
-        var axis = (center - image) / 3 * 2;
-      
-        $('#original-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'left' : axis
-
-        })
-
-
-        $('#processing-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'right' : axis
-
-        })
-    }
+    refresh();
 
     $('.dropbtn').css({
 
         'width' : width / 10,
         'font-size' : width / 70
+
     })
     
 
@@ -150,8 +73,8 @@ $(window).resize(function() {
 function refresh(){
 
     var width = $(window).width();
-    var right = (width / 2 - image / 2).toString().concat('px');
 
+    var right = (width - image) / 2;
 
     if (is_toggle == true){
 
@@ -164,13 +87,11 @@ function refresh(){
         });
     }
 
-    else{
+    else if(is_toggle == false){
 
-        var center = original_width / 2;
-  
-        image = original_width / 2.5;
+        var center = width / 2;
 
-        var axis = (center - image) / 2;
+        var axis = (center - image) / 3 * 2;
 
         $('#original-image').css({
 
@@ -192,7 +113,9 @@ function refresh(){
 }
 
 
-$('#upload-form2').on('submit', function(event){
+
+
+$('#upload-form').on('submit', function(event){
     
     event.preventDefault();
 
@@ -224,40 +147,39 @@ $(document).ready(
 
     function(){
 
-        original_width = $(window).width();
+        var width = $(window).width();
 
-        image = original_width / 2.5;
+        image = width / 2.5;
 
-        var center = original_width / 2;
+        var center = width / 2;
 
         var axis = (center - image) / 3 * 2;
 
-        $('#original-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'left' : axis
-
-        })
-
-
-        $('#processing-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'right' : axis
-
-        })
+        refresh();
   
 })
+
+
+
+$("#upload-input").change(
+
+    function() {
+
+        $('#upload-form').trigger('submit');
+     
+});
+
 /*
-$("#upload-input").on('submit', function(event){
+$(window).load(function(){
+      // your code
+      alert('standby')
+});*/
+
+/*$("#upload-input").on('submit', function(event){
     
      $('#upload-form2').trigger('submit');
      
 });*/
-
-
 
 /*
 $('.dropbtn').click(
@@ -354,9 +276,4 @@ $('form#upload-form').submit(function(){
 })*/
 
 
-/*
-$("#upload-input").change(
-    function() {
-     $('#upload-form2').trigger('submit');
-     
-});*/
+
