@@ -17,7 +17,7 @@
     
     /*text-align:center;*/
     align-content: center;  
-    /*display: none;*/
+    display: none;
     height:100%;
     width:100%;
     z-index:3;
@@ -131,43 +131,45 @@ work section
 process area
 ========================================================================== */
 
-#image-area{
-  
-  padding-top: 1000;
-}
+
 #process-area{
 
   z-index: 1;
-  align-content: center;  
+  /*align-content: center;  */
+  /*width: 1000px;*/
+
 }
 
 
 #original-image{
   position: absolute;
-  align-content: center;  
   left:0%;
+  /*align-content: center;  
+  
   width:49%;
+  width: 500px;*/
 }
 
 #processing-image{
   position: absolute;
-  right:0;
+  right:0;/*
   width:49%;
   background-color: red;
+  width: 500px;*/
 }
 
 
 /* Dropdown Button */
 .dropbtn {
+
     background-color: #4CAF50;
     color: white;
     padding: 16px;
     font-size: 16px;
     min-width: 100px;
+    width: 20%;
     margin-left: -4px;
     border: none;
-
-
     cursor: pointer;
 }
 
@@ -181,6 +183,7 @@ process area
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
+
     width: 100%;
     align-content: center;
     display: none;
@@ -188,6 +191,7 @@ process area
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
 }
 
 /* Links inside the dropdown */
@@ -198,7 +202,6 @@ process area
     font-size: 20px;
     text-decoration: none;
     text-align: center;
-
     display: block;
 }
 
@@ -214,7 +217,15 @@ process area
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-/*
+
 #filename {
   display: none;
-}*/
+}
+#current-version {
+  display: none;
+}
+
+
+#tool-bar{
+  width: 100%;
+}

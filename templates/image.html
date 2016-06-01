@@ -24,17 +24,11 @@
             <!--button id = 'upload' class = 'btn btn-danger' >Upload</button>
             <button id = 'url' class = 'btn btn-danger'>Url</button>
             <button id = 'binary' >binary</button-->
-
-
-
-
             <!--form action = 'upload_file' class='file-upload'  id = 'upload-form' enctype = 'multipart/form-data'>
             
                 {% csrf_token %}
                 <input id = 'upload-btn' class = 'btn btn-danger' type = 'submit' value = 'Upload'>
                 <input id = 'upload-image' class = 'file-input' type = 'file' name = 'image'>
-
-           
             </form-->
 
             <form action = 'upload_file' id = 'upload-form2' enctype = 'multipart/form-data'> 
@@ -54,56 +48,68 @@
         <div id = 'process-area'>
 
             <h1 id = 'filename'></h1>
-            <h1 id = 'current-version'></h1>
-            <p id = 'test'>xxxx</p>
-            
-            <h1> This is process - area </h1>
+            <h1 id = 'current-version'></h1>      
+            <h1> <center>This is process - area </center></h1>
 
             <div id = 'tool-bar'>
-
-                <div class="dropdown">
-                    <button class="dropbtn">File</button>
-                    <div class="dropdown-content">
-                        <p href="#">Download</p>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                <div class = 'dropdown'>
+                    <button class = 'dropbtn'>File</button>
+                    <div class = 'dropdown-content'>
+                        <a href = "#">Download</a>
+                        <a href = "#">Link 2</a>
+                        <a href = "#">Link 3</a>
                     </div>  
                 </div>
 
 
-                <div class="dropdown">
-                    <button class="dropbtn">tool</button>
-                    <div class="dropdown-content">
+                <div class = 'dropdown'>
+                    <button class = 'dropbtn'>tool</button>
+                    <div class = 'dropdown-content'>
                         <a id = 'binary'>Binary</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                        <a href = '#'>Link 2</a>
+                        <a href = '#'>Link 3</a>
                     </div>  
                 </div>
 
-                <div class="dropdown">
-                    <button class="dropbtn">undo</button>
-                    
+                <div class = 'dropdown'>
+                    <button class = 'dropbtn'>undo</button>        
                 </div>
 
 
+                <div class = 'dropdown'>
+                    <button id = 'toggle' class = 'dropbtn'>toggle</button>  
+                </div>
 
 
             </div>
+
+
+
+
+            <div id = 'bar'>
+
+                <hr>
+
+            </div>
+
+
+
 
 
             <div id = 'image-area'>
 
                 <div id = 'original-image-area'>
                    
-                    <!--img id = 'original-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img-->
+                    <img id = 'original-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img>
                 </div>
-
 
                 <div id = 'processing-image-area'>
                     
-                    <!--img id = 'processing-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img-->
+                    <img id = 'processing-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img>
                 </div>
+
             </div>
+
         </div>
 
      

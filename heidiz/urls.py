@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include, url
 from django.contrib import admin
-from blog.views import article, files, image, open_image, binary, upload_pic, upload_file
+from blog.views import article, files, image, open_image, binary, upload_file
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,7 +24,7 @@ urlpatterns = [
     
     url(r'^open$', open_image),
     url(r'^binary$', binary),
-    url(r'^upload_pic$', upload_pic),
+    #url(r'^upload_pic$', upload_pic),
     url(r'^upload_file$', upload_file),
     url(r'^files/(?P<filename>.*)$', files)
     #url(r'^ckeditor/', include('ckeditor_uploader.urls')),

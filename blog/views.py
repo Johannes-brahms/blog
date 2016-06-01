@@ -15,8 +15,6 @@ import os
 
 BASE_DIR  = settings.BASE_DIR
 
-tmp = os.path.join('static', 'tmp')
-
 
 
 # Create your views here.
@@ -67,8 +65,6 @@ def open_image(request):
 
     print request.GET.get('image-url')
 
-    
-
     return JsonResponse(data)
 
 
@@ -77,39 +73,101 @@ def binary(request):
     response = dict()
 
     filename = request.GET.get('filename')
-    version = request.GET.get('current-version')
 
-    print '[filename] : ', filename
-    print '[version] : ', version 
+    version = int(request.GET.get('current-version'))
 
-    try:
-        version = int(version) + 1
+    directory = os.path.join('files', filename.split('/')[1])
 
-    except:
-        raise
-
-
-    #response['filename'] = os.path.join('static', 'tmp', request.GET.get('image-url'))
-
-    original = os.path.join(BASE_DIR, filename)
     
-    image = cv2.imread(original, 0)
+    image = cv2.imread(os.path.join(directory, str(version) + '.jpg' ), 0)
 
-    save = os.path.join(BASE_DIR, 'files', filename.split('/')[-1].split('.')[0], str(version) + '.jpg')
+    # Binary
 
-    print '[save path] : ', save
-    ret, binary = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+    ret, image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 
+    # save file
 
-    cv2.imwrite(save, binary)
+    version += 1 # 
+
+    path = os.path.join(directory , str(version) + '.jpg')
+
+    cv2.imwrite(path, image)
+
+    # response
 
     response['current-version'] = str(version)
+
+    response['filename'] = path
 
     return JsonResponse(response)
 
 
 
 
+def handle_uploaded_file(f):
+
+    day, time = str(datetime.now()).split()
+
+    time = day + time.replace(':','-').replace('.','-')
+
+    os.mkdir(os.path.join('files', time))
+
+    filename = os.path.join('files', time , '0.jpg')
+
+    if os.path.isfile(filename):
+
+        print 'already exist'
+
+    with open(filename, 'wb+') as destination:
+
+        for chunk in f.chunks():
+
+            destination.write(chunk)   
+
+    return filename 
+
+
+def upload_file(request):
+
+    if request.method == 'POST':
+
+        form = ImageUploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            filename = handle_uploaded_file(request.FILES['image'])
+
+            response = {}
+
+            response['filename'] = filename
+
+            return JsonResponse(response)
+    
+    else:
+
+
+        form = ImageUploadForm()
+
+    return render(request, 'upload.html', {'form': form})
+    
+
+def files(request, filename):
+
+    import mimetypes
+
+    filename = os.path.join('files', filename)
+    download_name = 'tst.png'
+    wrapper = FileWrapper(open(filename))
+    content_type = mimetypes.guess_type(filename)[0]
+    response = HttpResponse(wrapper, content_type = content_type)
+    response['Content-Length'] = os.path.getsize(filename)
+    response['Content-Disposition'] = 'attachment; filename=%s' %download_name
+    
+    return response
+
+
+
+"""
             
 def upload_pic(request):
 
@@ -131,71 +189,4 @@ def upload_pic(request):
 
     return HttpResponseForbidden('allow only via PddOST')
 
-    
-def handle_uploaded_file(f):
-
-    
-
-    day, time = str(datetime.now()).split()
-
-    time = day + time.replace(':','-').replace('.','-')
-
-    filename = os.path.join('static','tmp', time + '.jpg')
-
-
-    if os.path.isfile(filename):
-
-        print 'already exist'
-
-    with open(filename, 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)   
-
-    return filename 
-
-def upload_file(request):
-    print 'in upload_file view'
-
-    print request.method
-
-    if request.method == 'POST':
-
-        form = ImageUploadForm(request.POST, request.FILES)
-        #print form.cleaned_data
-        print 'form : ', request.FILES
-        print 'request'
-
-        if form.is_valid():
-
-            print 'is valid'
-
-
-            filename = handle_uploaded_file(request.FILES['image'])
-
-            response = {}
-            response['filename'] = filename
-            print response['filename']
-            return JsonResponse(response)
-    
-    else:
-
-        print 'Not POST'
-        form = ImageUploadForm()
-
-    return render(request, 'upload.html', {'form': form})
-    
-
-def files(request, filename):
-
-
-    import mimetypes
-    
-    
-    filename = os.path.join('files', filename)
-    download_name = 'tst.png'
-    wrapper = FileWrapper(open(filename))
-    content_type = mimetypes.guess_type(filename)[0]
-    response = HttpResponse(wrapper, content_type = content_type)
-    response['Content-Length'] = os.path.getsize(filename)
-    response['Content-Disposition'] = 'attachment; filename=%s' %download_name
-    return response
+"""
