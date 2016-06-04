@@ -9,7 +9,7 @@
         <title >
             Image Process
         </title>
-        <script type="text/javascript" src = "{% static 'js/jquery-1.12.4.min.js' %}"></script>
+        
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'image.css' %}">
         
@@ -31,15 +31,17 @@
                 <input id = 'upload-image' class = 'file-input' type = 'file' name = 'image'>
             </form-->
 
-            <form action = 'upload_file' id = 'upload-form' enctype = 'multipart/form-data'> 
+            <center><form action = 'upload_file' id = 'upload-form' enctype = 'multipart/form-data'> 
                 
                 {% csrf_token %}
 
-                <center><button id = 'upload-button' class = "file-upload btn btn-danger ">            
-                    <input id = 'upload-input' type="file" class="file-input" name = 'image'>Upload
-                </button></center>
+                <button id = 'upload-button' class = "file-upload btn btn-danger ">            
+                    Upload<input id = 'upload-input' type="file" class="file-input" name = 'image'>
+                </button>
 
-            </form>
+                <!--div class='btn btn-danger file-upload'><input id = 'upload-input' type="file" class="file-input" name = 'image'></div-->
+
+            </form></center>
 
         </div>
 
@@ -51,38 +53,132 @@
             <h1 id = 'current-version'></h1>      
             <h1> <center>Image Process</center></h1>
 
-            <div id = 'tool-bar'>
+            <section id = 'tool-bar'>
 
-                <div class = 'dropdown'>
-                    <button class = 'dropbtn'>File</button>
-                    <div class = 'dropdown-content'>
-                        <a href = "#">Download</a>
-                        <a href = "#">Link 2</a>
-                        <a href = "#">Link 3</a>
-                    </div>  
-                </div>
+                 <section class = 'dropdown level-1'>
+
+                    <button id = 'Files' class = 'btn dropbtn'>File</button>
+
+                    <section class = 'level-2'>
+                        
+                        <li class = 'sub'>Download</li>
+
+                    </section>
+                    
+                </section>
+
+                
+                <section class = 'dropdown level-1'>
+                    <button id = 'smooth' class = 'btn dropbtn'>Smooth</button>
+
+                    <section class = 'level-2'>
+   
+                        <li>Blur
+
+                            <section class = 'dropdown-menu level-3'>
+                                 
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'></p>
+                                    <input id = 'blur-kernel'  type = 'range' min = 1 max = '9' step = '2'>
+
+                                </li>
+
+                                <li class = 'sub' id = 'blur'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li >medianBlur
+
+                            <section class = 'dropdown-menu level-3'>
+                                 
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'></p>
+
+                                    <input id = 'medianBlur-kernel'  type = 'range' min = '1' max = '9' step = '2'>
+                                
+                                </li>
+
+                                <li class = 'sub' id = 'medianBlur'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>GaussianBlur
+
+                            <section class = 'dropdown-menu level-3'>
+                                 
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'></p>
+
+                                    <input id = 'GaussianBlur-kernel'  type = 'range' min = '1' max = '9' step = '2'>
+                                
+                                </li>
+
+                                <li class = 'sub' id = 'GaussianBlur'>
+
+                                Submit</li>
+
+                            </section>
+
+                        </li>
+
+                    </section>
+
+                </section>
 
 
-                <div class = 'dropdown'>
-                    <button class = 'dropbtn'>tool</button>
-                    <div class = 'dropdown-content'>
-                        <a id = 'binary'>Binary</a>
-                        <a href = '#'>Link 2</a>
-                        <a href = '#'>Link 3</a>
-                    </div>  
-                </div>
+                <section class = 'dropdown level-1'>
 
-                <div class = 'dropdown'>
-                    <button class = 'dropbtn'>undo</button>        
-                </div>
+                    <button id = 'Edge' class = 'btn dropbtn'>Edge</button>
 
 
-                <div class = 'dropdown'>
-                    <button id = 'toggle' class = 'dropbtn'>toggle</button>  
-                </div>
+                    <section class = 'level-2'>
+                        
+                        <li>Canny
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                <li class = 'value-bar'>
+
+                                    TH  :  <p class = 'values'></p>
+                                    <input id = 'TH'  type = 'range' min = 0 max = '255' name="">
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    TL  :  <p class = 'values'></p>
+                                    <input id = 'TL'type = 'range' min = 0 max = '255' name="">
+     
+                                </li>
 
 
-            </div>
+                                <li class = 'sub' id = 'canny'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                    </section>
+                    
+                </section>
+
+
+                <section id = 'undo' class = 'dropdown'>
+                    <button class = 'btn dropbtn'>Undo</button>  
+                </section>
+
+
+                <section id = 'toggle' class = 'dropdown'>
+                    <button class = 'btn dropbtn'>Toggle</button>  
+                </section>
+
+            </section>
 
 
 
@@ -98,7 +194,7 @@
 
                 <div id = 'original-image-area'>
                    
-                    <img id = 'original-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img>
+                    <!--img id = 'original-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img-->
                 </div>
 
                 <div id = 'processing-image-area'>
@@ -111,15 +207,12 @@
         </div>
 
      
-
-     
-        
-        <script src = "{% static 'js/bootstrap.min.js' %}" async defer ></script>
-        <script src = "{% static 'image.js' %}" async defer ></script>
-        <script src = "{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
-        <script src = "{% static 'js/jquery.iframe-transport.js' %}"></script>
-        <script src = "{% static 'js/jquery.fileupload.js' %}"></script>
-
+        <script type="text/javascript" src = "{% static 'js/jquery-1.12.4.min.js' %}" defer></script>
+        <script src = "{% static 'js/bootstrap.min.js' %}" defer></script>
+        <script src = "{% static 'js/vendor/jquery.ui.widget.js' %}" defer></script>
+        <script src = "{% static 'js/jquery.iframe-transport.js' %}" defer></script>
+        <script src = "{% static 'js/jquery.fileupload.js' %}" defer></script>
+        <script src = "{% static 'image.js' %}" defer></script>
 
     </body>
     

@@ -12,7 +12,7 @@
 
 
 #home{
-    background-color: red;
+    background-color: gray;
     position:absolute;
     
     /*text-align:center;*/
@@ -32,8 +32,17 @@
 }
 */
 
+#upload-form{
+  /*vertical-align: middle;*/
+    text-align:center;
+    vertical-align: middle;
+    display: inline-block;
+    padding-top: 300px;
+ }
+
 #upload-button{
-  vertical-align: middle;
+    vertical-align: middle;
+  
  }
 
 .file-upload {
@@ -47,10 +56,12 @@
     position: absolute;
     top: 0;
     right: 0;
+    height: 100%;
     margin: 0;
     padding: 0;
     font-size: 20px;
     cursor: pointer;
+    /*background-color: green;*/
 }
 
 body{
@@ -59,8 +70,8 @@ body{
 
 #open-image,#about, #team, 
 #portfolio, #pricing, #contact {
-   padding-top: 100px;
-  padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 
@@ -173,6 +184,9 @@ process area
     cursor: pointer;
 }
 
+.dropbtn:hover {
+  color: white;
+}
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
@@ -195,7 +209,7 @@ process area
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content a,li{
     
     color: black;
     padding: 12px 16px;
@@ -228,4 +242,230 @@ process area
 
 #tool-bar{
   width: 100%;
+}
+
+.value-bar{
+
+  display: inline-block;
+
+}
+
+.values {
+  display: inline-block;
+}
+
+.horizontal-content {
+
+    width: 100%;
+    align-content: center;
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+
+.horizontal-button:hover {
+
+  display: block;
+  background-color: red;
+}
+
+/*
+ul ul {
+    position: absolute;
+    display: none;
+}
+
+li:hover ul {
+    display: block;
+}
+
+ul ul ul {
+    left: 100%;
+    top: 0;
+}
+li:hover > ul {
+    display: block;
+}*/
+
+.third-level-menu
+{
+    position: absolute;
+    top: 0;
+    right: -150px;
+    width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.third-level-menu > li
+{
+    height: 30px;
+    background: #999999;
+}
+.third-level-menu > li:hover { background: #CCCCCC; }
+
+.second-level-menu
+{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.second-level-menu > li
+{
+    position: relative;
+    height: 30px;
+    background: #999999;
+}
+.second-level-menu > li:hover { background: #CCCCCC; }
+
+.top-level-menu
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.top-level-menu > li
+{
+    position: relative;
+    float: left;
+    height: 30px;
+    width: 150px;
+    background: #999999;
+}
+.top-level-menu > li:hover { background: #CCCCCC; }
+
+.top-level-menu li:hover > ul
+{
+    /* On hover, display the next level's menu */
+    display: inline;
+}
+
+
+/* Menu Link Styles */
+
+.top-level-menu a /* Apply to all links inside the multi-level menu */
+{
+    font: bold 14px Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 0 0 0 10px;
+
+    /* Make the link cover the entire list item-container */
+    display: block;
+    line-height: 30px;
+}
+.top-level-menu a:hover { color: #000000; }
+
+
+/*-------------------------------------------------------------------*/
+
+
+.level-3{
+
+  width:150px;
+  position: absolute;
+  top: 0;
+  left:160px;
+  list-style: none;
+  padding: 0;
+  margin: 0; 
+}
+
+
+.level-3 > li{
+
+  list-style: none;
+
+  
+}
+
+
+
+.level-2{
+
+  position: absolute;
+  list-style-type: none; 
+  background-color: white;
+  text-align: center;
+  display: none;
+  width: 160px;
+  border-radius:10px;
+}
+
+.level-2 > li{
+
+  position: relative;
+
+}
+
+.level-2 li:hover {
+  background-color: lightgray;
+  border-radius:10px;
+}
+
+
+.level-1:hover > .level-2{
+
+  display: block;
+
+}
+
+
+.level-1{
+
+  display: inline-block;
+
+}
+
+
+.level-1 > button{
+
+  width: 75px;
+
+}
+
+
+li:hover > section{
+
+  display: block;
+
+}
+
+
+
+
+/*-----------------------------------------------------------*/
+
+#toggle {
+
+  float: right;
+}
+
+
+#undo{
+
+  float: right;
+
+}
+
+
+
+
+
+
+.sub{
+
+  cursor: pointer;
 }

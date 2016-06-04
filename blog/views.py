@@ -55,6 +55,13 @@ def image(request):
     
 
 
+def toggle(request):
+
+
+
+
+    return 
+
 
 
 def open_image(request):
@@ -73,6 +80,8 @@ def binary(request):
     response = dict()
 
     filename = request.GET.get('filename')
+
+    print filename
 
     version = int(request.GET.get('current-version'))
 
@@ -112,7 +121,9 @@ def handle_uploaded_file(f):
 
     os.mkdir(os.path.join('files', time))
 
-    filename = os.path.join('files', time , '0.jpg')
+
+    directory = os.path.join('files', time );
+    filename = os.path.join(directory, '0.jpg');
 
     if os.path.isfile(filename):
 
@@ -124,7 +135,7 @@ def handle_uploaded_file(f):
 
             destination.write(chunk)   
 
-    return filename 
+    return filename, directory
 
 
 def upload_file(request):
@@ -135,10 +146,11 @@ def upload_file(request):
 
         if form.is_valid():
 
-            filename = handle_uploaded_file(request.FILES['image'])
+            original, filename = handle_uploaded_file(request.FILES['image'])
 
             response = {}
 
+            response['original'] = original
             response['filename'] = filename
 
             return JsonResponse(response)
@@ -190,3 +202,133 @@ def upload_pic(request):
     return HttpResponseForbidden('allow only via PddOST')
 
 """
+
+
+
+
+
+def canny(request):
+
+    response = dict()
+
+    filename = request.GET.get('filename')
+
+    print request.GET.get('TH')
+
+    version = int(request.GET.get('current-version'))
+
+    directory = os.path.join('files', filename.split('/')[1])
+
+    image = cv2.imread(os.path.join(directory, str(version) + '.jpg' ), 0)
+
+    TH = int(request.GET.get('TH'))
+
+    TL = int(request.GET.get('TL'))
+
+    # Binary
+
+    image = cv2.Canny(image,TL, TH)
+
+    # save file
+
+    version += 1 # 
+
+    path = os.path.join(directory , str(version) + '.jpg')
+
+    cv2.imwrite(path, image)
+
+    # response
+
+    response['current-version'] = str(version)
+
+    response['filename'] = path
+
+    return JsonResponse(response)
+
+
+
+
+
+def blur(request):
+
+
+    response = dict()
+
+    filename = request.GET.get('filename')
+
+    print 'filename : ', filename
+    print 'version : ', request.GET.get('current-version')
+
+    image, response = process(request, response)
+
+    # value 
+
+    kernel = int(request.GET.get('blur-kernel'))
+
+    image = cv2.blur(image, (kernel,kernel))
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+
+def process(request, response, color = True):
+
+    filename = request.GET.get('filename')
+
+    #print 'filename : ', filename
+    #print 'version : ', request.GET.get('current-version')
+
+    version = int(request.GET.get('current-version'))
+
+    directory = os.path.join('files', filename.split('/')[1])
+
+    image = cv2.imread(os.path.join(directory, str(version) + '.jpg' ), color)
+    version += 1 # 
+    path = os.path.join(directory , str(version) + '.jpg')
+    response['current-version'] = str(version)
+    response['filename'] = path
+
+    return image, response
+
+
+
+def GaussianBlur(request):
+
+
+    response = dict()
+
+    filename = request.GET.get('filename')
+
+    image, response = process(request, response)
+
+    # value 
+
+    kernel = int(request.GET.get('GaussianBlur-kernel'))
+
+    image = cv2.blur(image, (kernel,kernel))
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+def medianBlur(request):
+
+
+    response = dict()
+
+    filename = request.GET.get('filename')
+
+    image, response = process(request, response)
+
+    # value 
+
+    kernel = int(request.GET.get('medianBlur-kernel'))
+
+    image = cv2.blur(image, (kernel,kernel))
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)

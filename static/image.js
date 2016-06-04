@@ -5,23 +5,104 @@ var is_toggle = false
 
 var image
 
+var version
+
+var filename
+
 /* Function */
+
+function refresh(){
+
+    
+
+    var width = $(window).width();
+
+    if (is_toggle == true){
+
+        var right = (width - image * 2) / 2;
+
+        $('#processing-image').css({    
+
+            'position' : 'absolute',
+            'right' : right,
+            'width' : image * 2,
+
+        });
+    }
+
+    else if(is_toggle == false){
+
+        var center = width / 2;
+
+        var axis = (center - image) / 3 * 2;
+
+        $('#original-image').css({
+
+            'position' : 'absolute',
+            'width' : image,
+            'left' : axis
+
+        })
+
+
+        $('#processing-image').css({
+
+            'position' : 'absolute',
+            'width' : image,
+            'right' : axis
+
+        })
+    }
+
+    
+}
+
+$(document).ready(
+
+    function(){
+
+        var width = $(window).width();
+
+        image = width / 2.5;
+
+        var center = width / 2;
+
+        var axis = (center - image) / 3 * 2;
+
+        refresh();
+  
+})
+
+$(window).resize(function() {
+
+    var width = $(window).width()
+
+    refresh()
+
+    $('.dropbtn').css({
+
+        'width' : width / 10,
+
+        'font-size' : width / 70
+
+    })
+
+});
+
+
+/* Button */
 
 $('#binary').click(
 
 	function (argument) {
 
-
-		var filename = $('#filename').text();
-
-		var version = $('#current-version').text();
+		//var version = $('#current-version').text();
 		  
 		$.get('binary', {'filename' : filename, 'current-version' : version}, function(response){
-
-			alert(response['filename']);
-			//$('#image-zone').html('<img src = ' + response['image-url'] + '></img>')
+			
 			$('#processing-image-area').html('<img id = "processing-image" src = ' + response['filename'] + '></img>')
-			$('#current-version').html(response['current-version']);
+
+            version = response['current-version']
 
             refresh();
 		})
@@ -53,73 +134,31 @@ $('#toggle').click(
     })
 
 
-$(window).resize(function() {
+$('#undo').click(
 
-    var width = $(window).width();
+    function(){
 
-    refresh();
+        version -= 1
 
-    $('.dropbtn').css({
+        if (version < 0)
 
-        'width' : width / 10,
-        'font-size' : width / 70
+            version = 0
 
+        else {
+
+            $('#processing-image-area').html('<img id = "processing-image" src = ' + filename.concat('/').concat(version).concat('.jpg') + '></img>')
+
+            refresh();
+        }
     })
-    
 
-});
-
-
-function refresh(){
-
-    var width = $(window).width();
-
-    var right = (width - image) / 2;
-
-    if (is_toggle == true){
-
-        $('#processing-image').css({    
-
-            'position' : 'absolute',
-            'right' : right,
-            'width' : image,
-
-        });
-    }
-
-    else if(is_toggle == false){
-
-        var center = width / 2;
-
-        var axis = (center - image) / 3 * 2;
-
-        $('#original-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'left' : axis
-
-        })
-
-
-        $('#processing-image').css({
-
-            'position' : 'absolute',
-            'width' : image,
-            'right' : axis
-
-        })
-    }
-}
-
-
-
+/* listen */
 
 $('#upload-form').on('submit', function(event){
     
     event.preventDefault();
 
-    alert('submit');
+    /*alert('submit');*/
   
     $.ajax({
 
@@ -131,149 +170,100 @@ $('#upload-form').on('submit', function(event){
     	dataType: 'json',
     	success: function(response){
     	
-    	   $('#original-image-area').html('<img id = "original-image" src = ' + response['filename'] + '></img>')
-    	   $('#processing-image-area').html('<img id = "processing-image" src = ' + response['filename'] + '></img>')
-    	   $('#filename').html(response['filename']);
-    	   $('#current-version').html('0');
-            refresh();
-    	   $('#home').slideUp();
+    	   $('#original-image-area').html('<img id = "original-image" src = ' + response['original'] + '></img>')
+    	   $('#processing-image-area').html('<img id = "processing-image" src = ' + response['original'] + '></img>')
+    	   //$('#filename').html(response['filename']);
+    	   //$('#current-version').html('0');
+           filename = response['filename'];
+           version = 0;
+           refresh();
 
-    	}
-	});
-})
+           $('#home').animate({width:'toggle'}, 350);
 
+        }
+    });
+});
 
-$(document).ready(
-
-    function(){
-
-        var width = $(window).width();
-
-        image = width / 2.5;
-
-        var center = width / 2;
-
-        var axis = (center - image) / 3 * 2;
-
-        refresh();
-  
-})
-
-
-
-$("#upload-input").change(
+$('#upload-input').change(
 
     function() {
+
+        /*alert('change')*/
 
         $('#upload-form').trigger('submit');
      
 });
 
-/*
-$(window).load(function(){
-      // your code
-      alert('standby')
-});*/
 
-/*$("#upload-input").on('submit', function(event){
-    
-     $('#upload-form2').trigger('submit');
-     
-});*/
-
-/*
-$('.dropbtn').click(
-	function(){
-
-		$(this).closest('.dropdown').find('.dropdown-content').show();
-	})*/
-
-    /*
-$('#open-image').click(
-
-    function(argument){
-
-        var image_url = $('#image-url').val();
-
-        $.get('open', {'image-url' : image_url}, function(response) {
-
-            $('#image-zone').html('<img src = ' + response['image-url'] + '></img>')
-        
-        })
-    })
-
-*/
-
-/*$('#upload-btn').hover(
-        function(){
-            
-            $('#upload-image').slideDown();
-        })
-*/
-
-/*$('#upload-image').mouseleave(
-        function(){
-            $(this).slideUp();
-        })
-*/
-
-/*$('#upload-btn').click(
+$('.value-bar').change(
 
     function(){
-        alert('dddssssd')
 
-        var fileInput = $('#upload-image')
+        var values = $(this).find('input[type = "range"]').val();
 
+        $(this).find('.values').html(values);
 
-        $.post('upload_file', {}, function(response){
+    }
+)
 
-            alert('dddd')
-            $('#upload-result').html('upload success')
+function Call(S){
+
+    var J = {}
+
+    $('#' + S).parent().find('input[type = "range"]').each(function(){
+
+        name = $(this).attr('id');
+            
+        var values = $(this).val();
+
+        J[name] = values;
+
         })
+
+    J['filename'] = filename;
+
+    J['current-version'] = version;
+
+    $.get(S, J, function(response){
+            
+        $('#processing-image-area').html('<img id = "processing-image" src = ' + response['filename'] + '></img>')
+
+        version = response['current-version']
+
+        refresh();
+
     })
-*/
 
-/*$('#upload-btn').click( function() {
-    var a = $('#upload-form').serialize()
-    
-    $.post( 'upload_file', $('#upload-form').serialize(), function(data) {
-         
-         
-       },
-       'json' // I expect a JSON response
-    );
-});*/
+}
 
-/*$('#upload-btn').click(function(){
-    alert('dddddddddddd')
-    $('#upload-form').submit()
-})*/
+/* Opencv function */
 
-/*
+$('#canny').click(
 
+    function(){
 
-$('form#upload-form').submit(function(){
-    
+        Call('canny')
+    })
 
-    var formData = new FormData($(this))
+$('#blur').click(
 
-    alert('success')
+    function(){
 
-     $.ajax({
-        url: 'upload_file',
-        type: 'POST',
-        data: formData,
-        async: false,
-        success: function (data) {
-            alert(data)
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    });
+        Call('blur')
+    })
 
+$('#GaussianBlur').click(
 
-})*/
+    function(){
 
+        Call('GaussianBlur')
+    })
+
+$('#medianBlur').click(
+
+    function(){
+
+        Call('medianBlur')
+    })
 
 
