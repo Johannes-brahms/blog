@@ -36,7 +36,7 @@
                 {% csrf_token %}
 
                 <button id = 'upload-button' class = "file-upload btn btn-danger ">            
-                    Upload<input id = 'upload-input' type="file" class="file-input" name = 'image'>
+                    Start<input id = 'upload-input' type="file" class="file-input" name = 'image'>
                 </button>
 
                 <!--div class='btn btn-danger file-upload'><input id = 'upload-input' type="file" class="file-input" name = 'image'></div-->
@@ -51,7 +51,7 @@
 
             <h1 id = 'filename'></h1>
             <h1 id = 'current-version'></h1>      
-            <h1> <center>Image Process</center></h1>
+            <h1><center><a id = 'process-title' href="image">Image Process</a></center></h1>
 
             <section id = 'tool-bar'>
 
@@ -79,8 +79,8 @@
                                  
                                 <li class = 'value-bar'>
 
-                                    Kernel  :  <p class = 'values'></p>
-                                    <input id = 'blur-kernel'  type = 'range' min = 1 max = '9' step = '2'>
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'blur-kernel'  type = 'range' min = 3 max = 11 step = 2 value = 3>
 
                                 </li>
 
@@ -96,9 +96,9 @@
                                  
                                 <li class = 'value-bar'>
 
-                                    Kernel  :  <p class = 'values'></p>
+                                    Kernel  :  <p class = 'values'>3</p>
 
-                                    <input id = 'medianBlur-kernel'  type = 'range' min = '1' max = '9' step = '2'>
+                                    <input id = 'medianBlur-kernel'  type = 'range' min = 3 max = 11 step = 2 value = 3>
                                 
                                 </li>
 
@@ -114,9 +114,9 @@
                                  
                                 <li class = 'value-bar'>
 
-                                    Kernel  :  <p class = 'values'></p>
+                                    Kernel  :  <p class = 'values'>3</p>
 
-                                    <input id = 'GaussianBlur-kernel'  type = 'range' min = '1' max = '9' step = '2'>
+                                    <input id = 'GaussianBlur-kernel'  type = 'range' min = 3 max = 11 step = 2 value = 3>
                                 
                                 </li>
 
@@ -143,19 +143,23 @@
                         <li>Canny
                             <section  class = 'dropdown-menu level-3'>
                                 
-                                <li class = 'value-bar'>
 
-                                    TH  :  <p class = 'values'></p>
-                                    <input id = 'TH'  type = 'range' min = 0 max = '255' name="">
-
-                                </li>
 
                                 <li class = 'value-bar'>
 
-                                    TL  :  <p class = 'values'></p>
-                                    <input id = 'TL'type = 'range' min = 0 max = '255' name="">
+                                    TL  :  <p class = 'values'>100</p>
+                                    <input id = 'TL'type = 'range' min = 0 max = 255 value = 100>
      
                                 </li>
+
+                                <li class = 'value-bar'>
+
+                                    TH  :  <p class = 'values'>200</p>
+                                    <input id = 'TH'  type = 'range' min = 0 max = 255 value = 200>
+
+                                </li>
+
+                                
 
 
                                 <li class = 'sub' id = 'canny'>Submit</li>
@@ -179,8 +183,6 @@
                 </section>
 
             </section>
-
-
 
 
             <div id = 'bar'>

@@ -37,7 +37,7 @@
     text-align:center;
     vertical-align: middle;
     display: inline-block;
-    padding-top: 300px;
+    padding-top: 400px;
  }
 
 #upload-button{
@@ -122,11 +122,13 @@ work section
   transition: all 0.4s ease-in-out;
 }
 #home .btn:hover {
-  background: #00c6d7;
+  /*background: #00c6d7;*/
+  background-color: #70C1B3;
   border-color: transparent;
 }
 #home .btn-danger {
-  background: #00c6d7;
+  /*background: #00c6d7;*/
+  background-color: #70C1B3;
   border-color: transparent;
 }
 #home .btn-danger:hover {
@@ -173,7 +175,7 @@ process area
 /* Dropdown Button */
 .dropbtn {
 
-    background-color: #4CAF50;
+    background-color: #70C1B3;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -229,7 +231,7 @@ process area
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #70C1B3;
 }
 
 #filename {
@@ -254,120 +256,6 @@ process area
   display: inline-block;
 }
 
-.horizontal-content {
-
-    width: 100%;
-    align-content: center;
-    display: block;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-
-.horizontal-button:hover {
-
-  display: block;
-  background-color: red;
-}
-
-/*
-ul ul {
-    position: absolute;
-    display: none;
-}
-
-li:hover ul {
-    display: block;
-}
-
-ul ul ul {
-    left: 100%;
-    top: 0;
-}
-li:hover > ul {
-    display: block;
-}*/
-
-.third-level-menu
-{
-    position: absolute;
-    top: 0;
-    right: -150px;
-    width: 150px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-}
-
-.third-level-menu > li
-{
-    height: 30px;
-    background: #999999;
-}
-.third-level-menu > li:hover { background: #CCCCCC; }
-
-.second-level-menu
-{
-    position: absolute;
-    top: 30px;
-    left: 0;
-    width: 150px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-}
-
-.second-level-menu > li
-{
-    position: relative;
-    height: 30px;
-    background: #999999;
-}
-.second-level-menu > li:hover { background: #CCCCCC; }
-
-.top-level-menu
-{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.top-level-menu > li
-{
-    position: relative;
-    float: left;
-    height: 30px;
-    width: 150px;
-    background: #999999;
-}
-.top-level-menu > li:hover { background: #CCCCCC; }
-
-.top-level-menu li:hover > ul
-{
-    /* On hover, display the next level's menu */
-    display: inline;
-}
-
-
-/* Menu Link Styles */
-
-.top-level-menu a /* Apply to all links inside the multi-level menu */
-{
-    font: bold 14px Arial, Helvetica, sans-serif;
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 0 0 0 10px;
-
-    /* Make the link cover the entire list item-container */
-    display: block;
-    line-height: 30px;
-}
-.top-level-menu a:hover { color: #000000; }
-
 
 /*-------------------------------------------------------------------*/
 
@@ -381,6 +269,7 @@ li:hover > ul {
   list-style: none;
   padding: 0;
   margin: 0; 
+  border-radius:10px;
 }
 
 
@@ -411,7 +300,8 @@ li:hover > ul {
 }
 
 .level-2 li:hover {
-  background-color: lightgray;
+  background-color: #1d1f21;
+  color: #f0c674;
   border-radius:10px;
 }
 
@@ -468,4 +358,11 @@ li:hover > section{
 .sub{
 
   cursor: pointer;
+}
+
+
+#process-title {
+
+  color: #70C1B3;
+  text-decoration: none;
 }

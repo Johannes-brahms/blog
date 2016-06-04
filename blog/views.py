@@ -168,7 +168,7 @@ def files(request, filename):
     import mimetypes
 
     filename = os.path.join('files', filename)
-    download_name = 'tst.png'
+    download_name = 'test.jpg'
     wrapper = FileWrapper(open(filename))
     content_type = mimetypes.guess_type(filename)[0]
     response = HttpResponse(wrapper, content_type = content_type)
@@ -179,41 +179,11 @@ def files(request, filename):
 
 
 
-"""
-            
-def upload_pic(request):
-
-    if request.method == 'POST':      
-
-        form = ImageUploadForm(request.POST, request.FILES)
-
-        if form.is_valid():
-
-            print 'is valid'
-
-            m = ExampleModel.objects.get(pk = 0)
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-
-            return HttpResponse('image upload success')
-
-        print 'not valid'
-
-    return HttpResponseForbidden('allow only via PddOST')
-
-"""
-
-
-
-
-
 def canny(request):
 
     response = dict()
 
     filename = request.GET.get('filename')
-
-    print request.GET.get('TH')
 
     version = int(request.GET.get('current-version'))
 
@@ -251,15 +221,9 @@ def canny(request):
 
 def blur(request):
 
-
-    response = dict()
-
     filename = request.GET.get('filename')
 
-    print 'filename : ', filename
-    print 'version : ', request.GET.get('current-version')
-
-    image, response = process(request, response)
+    image, response = process(request)
 
     # value 
 
@@ -273,21 +237,24 @@ def blur(request):
 
 
 
-def process(request, response, color = True):
+def process(request, color = True):
+
+    response = dict()
 
     filename = request.GET.get('filename')
-
-    #print 'filename : ', filename
-    #print 'version : ', request.GET.get('current-version')
 
     version = int(request.GET.get('current-version'))
 
     directory = os.path.join('files', filename.split('/')[1])
 
     image = cv2.imread(os.path.join(directory, str(version) + '.jpg' ), color)
+    
     version += 1 # 
+    
     path = os.path.join(directory , str(version) + '.jpg')
+    
     response['current-version'] = str(version)
+    
     response['filename'] = path
 
     return image, response
@@ -296,12 +263,9 @@ def process(request, response, color = True):
 
 def GaussianBlur(request):
 
-
-    response = dict()
-
     filename = request.GET.get('filename')
 
-    image, response = process(request, response)
+    image, response = process(request)
 
     # value 
 
@@ -316,12 +280,9 @@ def GaussianBlur(request):
 
 def medianBlur(request):
 
-
-    response = dict()
-
     filename = request.GET.get('filename')
 
-    image, response = process(request, response)
+    image, response = process(request)
 
     # value 
 
