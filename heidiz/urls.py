@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^upload_file$', upload_file),
     url(r'^files/(?P<filename>.*)$', files),
 
+    url(r'^download$', download),
 
     # opencv function
 
@@ -36,5 +37,11 @@ urlpatterns = [
     url(r'^canny$', canny),
     url(r'^GaussianBlur$', GaussianBlur),
     url(r'^medianBlur$', medianBlur),
+    url(r'^erode$', erode),
+    url(r'^dilate$', dilate),
+    url(r'^opening$', opening),
+    url(r'^closing$', closing),
+    url(r'^sobel$', sobel),
+    url(r'^Morphological-Gradient$', Morphological_Gradient),
     #url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]

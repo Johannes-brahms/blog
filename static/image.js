@@ -54,6 +54,8 @@ function refresh(){
         })
     }
 
+    $('#download-link').attr('href', filename + '/' + version + '.jpg' )
+
     
 }
 
@@ -92,21 +94,6 @@ $(window).resize(function() {
 
 /* Button */
 
-$('#binary').click(
-
-	function (argument) {
-
-		//var version = $('#current-version').text();
-		  
-		$.get('binary', {'filename' : filename, 'current-version' : version}, function(response){
-			
-			$('#processing-image-area').html('<img id = "processing-image" src = ' + response['filename'] + '></img>')
-
-            version = response['current-version']
-
-            refresh();
-		})
-	})
 
 
 $('#toggle').click(
@@ -175,7 +162,9 @@ $('#upload-form').on('submit', function(event){
     	   //$('#filename').html(response['filename']);
     	   //$('#current-version').html('0');
            filename = response['filename'];
+        
            version = 0;
+        
            refresh();
 
            $('#home').animate({width:'toggle'}, 350);
@@ -236,6 +225,26 @@ function Call(S){
 
 }
 
+
+
+$('#download').click(
+
+    function(){
+
+        var J = {}
+
+        J['filename'] = filename;
+
+        J['current-version'] = version;
+
+        $.get('download', J, function(response){
+            
+        alert('download')
+
+        })
+    }
+)
+
 /* Opencv function */
 
 $('#canny').click(
@@ -266,4 +275,60 @@ $('#medianBlur').click(
         Call('medianBlur')
     })
 
+$('#erode').click(
+
+    function(){
+
+        Call('erode')
+    })
+
+$('#dilate').click(
+
+    function(){
+
+        Call('dilate')
+    })
+
+
+
+$('#opening').click(
+
+    function(){
+
+        Call('opening')
+    })
+
+
+$('#closing').click(
+
+    function(){
+
+        Call('closing')
+    })
+
+
+$('#sobel').click(
+
+    function(){
+
+        Call('sobel')
+    })
+
+
+
+
+$('#Morphological-Gradient').click(
+
+    function(){
+
+        Call('Morphological-Gradient')
+    })
+
+
+$('#binary').click(
+
+    function(){
+
+        Call('binary')
+    })
 

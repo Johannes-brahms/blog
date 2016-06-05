@@ -61,10 +61,22 @@
 
                     <section class = 'level-2'>
                         
-                        <li class = 'sub'>Download</li>
+                        <li class = 'sub'><a id = 'download-link' href = ''>Download</a></li>
 
                     </section>
                     
+                </section>
+
+                <section class = 'dropdown level-1'>
+                    <button id = 'tool' class = 'btn dropbtn'>Tool</button>
+
+                    <section class = 'level-2'>
+   
+                        <li class = 'sub' id = 'binary'>Binary</li>
+               
+
+                    </section>
+
                 </section>
 
                 
@@ -140,11 +152,41 @@
 
                     <section class = 'level-2'>
                         
-                        <li>Canny
+                        <li>Sobel
+                        
                             <section  class = 'dropdown-menu level-3'>
                                 
+                                 <li class = 'value-bar'>
 
+                                    X  :  <p class = 'values'>1</p>
+                                    <input id = 'X'  type = 'range' min = 0 max = 2 value = 1>
 
+                                </li>
+
+                                 <li class = 'value-bar'>
+
+                                    Y  :  <p class = 'values'>1</p>
+                                    <input id = 'Y'  type = 'range' min = 0 max = 2 value = 1>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+                                <li class = 'sub' id = 'sobel'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Canny
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
                                 <li class = 'value-bar'>
 
                                     TL  :  <p class = 'values'>100</p>
@@ -159,7 +201,6 @@
 
                                 </li>
 
-                                
 
 
                                 <li class = 'sub' id = 'canny'>Submit</li>
@@ -167,6 +208,125 @@
                             </section>
 
                         </li>
+
+
+                    </section>
+                    
+                </section>
+
+                <section class = 'dropdown level-1'>
+
+                    <button id = 'Morphology' class = 'btn dropbtn'>Morphology</button>
+
+                    <section class = 'level-2'>
+                        
+                        <li>Dilation
+                   
+                            <section  class = 'dropdown-menu level-3'>
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    Iteration  :  <p class = 'values'>1</p>
+                                    <input id = 'Iteration' type = 'range' min = 1 max = 10 value = 1>
+     
+                                </li>
+
+                           
+                                <li class = 'sub' id = 'dilate'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Erosion
+
+                            <section  class = 'dropdown-menu level-3'>
+                                
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    Iteration  :  <p class = 'values'>1</p>
+                                    <input id = 'Iteration' type = 'range' min = 1 max = 10 value = 1>
+     
+                                </li>
+
+                                <li class = 'sub' id = 'erode'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Opening
+
+                            <section  class = 'dropdown-menu level-3'>
+                                
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+                                <li class = 'sub' id = 'opening'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Closing
+
+                            <section  class = 'dropdown-menu level-3'>
+                                
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+
+                                <li class = 'sub' id = 'closing'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Morphological Gradient
+
+                            <section  class = 'dropdown-menu level-3'>
+                                
+
+                                <li class = 'value-bar'>
+
+                                    Kernel  :  <p class = 'values'>3</p>
+                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+     
+                                </li>
+
+
+                                <li class = 'sub' id = 'Morphological-Gradient'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+
 
                     </section>
                     

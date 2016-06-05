@@ -350,7 +350,10 @@ li:hover > section{
 
 }
 
-
+#download-link {
+  color: #70C1B3;
+  text-decoration: none;
+}
 
 
 

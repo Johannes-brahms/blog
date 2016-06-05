@@ -12,6 +12,7 @@ import urllib
 import json
 import cv2
 import os
+import numpy as np
 
 BASE_DIR  = settings.BASE_DIR
 
@@ -37,32 +38,15 @@ def article(request, title):
 
 
 
-
+# function 
 
 def image(request):
-
-    if request.is_ajax():
-
-        message = 'yes, Ajax'
-
-    else:
-        message = 'No Ajax'
 
     return render(
             request,
             'image.html')
 
     
-
-
-def toggle(request):
-
-
-
-
-    return 
-
-
 
 def open_image(request):
 
@@ -75,40 +59,6 @@ def open_image(request):
     return JsonResponse(data)
 
 
-def binary(request):
-
-    response = dict()
-
-    filename = request.GET.get('filename')
-
-    print filename
-
-    version = int(request.GET.get('current-version'))
-
-    directory = os.path.join('files', filename.split('/')[1])
-
-    
-    image = cv2.imread(os.path.join(directory, str(version) + '.jpg' ), 0)
-
-    # Binary
-
-    ret, image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-
-    # save file
-
-    version += 1 # 
-
-    path = os.path.join(directory , str(version) + '.jpg')
-
-    cv2.imwrite(path, image)
-
-    # response
-
-    response['current-version'] = str(version)
-
-    response['filename'] = path
-
-    return JsonResponse(response)
 
 
 
@@ -123,6 +73,7 @@ def handle_uploaded_file(f):
 
 
     directory = os.path.join('files', time );
+
     filename = os.path.join(directory, '0.jpg');
 
     if os.path.isfile(filename):
@@ -166,9 +117,8 @@ def upload_file(request):
 def files(request, filename):
 
     import mimetypes
-
+    download_name = filename
     filename = os.path.join('files', filename)
-    download_name = 'test.jpg'
     wrapper = FileWrapper(open(filename))
     content_type = mimetypes.guess_type(filename)[0]
     response = HttpResponse(wrapper, content_type = content_type)
@@ -178,6 +128,33 @@ def files(request, filename):
     return response
 
 
+
+
+def download(request):
+
+    import mimetypes
+
+    filename = request.GET.get('filename')
+
+    version = int(request.GET.get('current-version'))
+
+    directory = os.path.join(filename.split('/')[1])
+
+    print directory
+
+    download_name = directory + '.jpg'
+
+    wrapper = FileWrapper(open(os.path.join('files',directory, str(version) + '.jpg' )))
+
+    content_type = mimetypes.guess_type(filename)[0]
+    response = HttpResponse(wrapper, content_type = content_type)
+    response['Content-Length'] = os.path.getsize(filename)
+    response['Content-Disposition'] = 'attachment; filename=%s' %download_name
+    
+    return response
+
+
+# OpenCV function
 
 def canny(request):
 
@@ -215,10 +192,6 @@ def canny(request):
 
     return JsonResponse(response)
 
-
-
-
-
 def blur(request):
 
     filename = request.GET.get('filename')
@@ -234,8 +207,6 @@ def blur(request):
     cv2.imwrite(response['filename'], image)
 
     return JsonResponse(response)
-
-
 
 def process(request, color = True):
 
@@ -259,8 +230,6 @@ def process(request, color = True):
 
     return image, response
 
-
-
 def GaussianBlur(request):
 
     filename = request.GET.get('filename')
@@ -277,7 +246,6 @@ def GaussianBlur(request):
 
     return JsonResponse(response)
 
-
 def medianBlur(request):
 
     filename = request.GET.get('filename')
@@ -289,6 +257,117 @@ def medianBlur(request):
     kernel = int(request.GET.get('medianBlur-kernel'))
 
     image = cv2.blur(image, (kernel,kernel))
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+def binary(request):
+
+    image, response = process(request, color = False)
+
+    ret, image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+
+def erode(request):
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    kernel = np.ones((kernel,kernel),np.uint8)
+
+    iteration = int(request.GET.get('Iteration'))
+
+    print 'type : ',type(image)
+
+    image = cv2.erode(image,kernel,iterations = iteration)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+def dilate(request):
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    kernel = np.ones((kernel,kernel),np.uint8)
+
+    iteration = int(request.GET.get('Iteration'))
+
+    image = cv2.dilate(image,kernel,iterations = iteration)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+
+def opening(request):
+
+    filename = request.GET.get('filename')
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    kernel = np.ones((kernel,kernel),np.uint8)
+
+    image = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+def closing(request):
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    kernel = np.ones((kernel,kernel),np.uint8)
+
+    image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+def Morphological_Gradient(request):
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    kernel = np.ones((kernel,kernel),np.uint8)
+
+    image = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, kernel)
+
+    cv2.imwrite(response['filename'], image)
+
+    return JsonResponse(response)
+
+
+def sobel(request):
+
+    image, response = process(request)
+
+    kernel = int(request.GET.get('Kernel'))
+
+    X = int(request.GET.get('X'))
+
+    Y = int(request.GET.get('Y'))
+
+    image = cv2.Sobel(image, cv2.CV_8U, X, Y, ksize = kernel)
 
     cv2.imwrite(response['filename'], image)
 
