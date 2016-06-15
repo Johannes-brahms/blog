@@ -337,7 +337,7 @@ li:hover > section{
 
 
 /*-----------------------------------------------------------*/
-
+/*
 #toggle {
 
   float: right;
@@ -349,6 +349,16 @@ li:hover > section{
   float: right;
 
 }
+#redo{
+
+  float: right;
+
+}
+#reset{
+
+  float: right;
+
+}*/
 
 #download-link {
   color: #70C1B3;
@@ -368,4 +378,15 @@ li:hover > section{
 
   color: #70C1B3;
   text-decoration: none;
+}
+
+#Morphology {
+
+  width: 150px;
+}
+
+
+#segmentation{
+
+  width: 150px;
 }

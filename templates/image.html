@@ -11,7 +11,7 @@
         </title>
         
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'image.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/image.css' %}">
         
         <!--script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
 
@@ -21,64 +21,170 @@
     <body>
 
         <div id = 'home'>
-            <!--button id = 'upload' class = 'btn btn-danger' >Upload</button>
-            <button id = 'url' class = 'btn btn-danger'>Url</button>
-            <button id = 'binary' >binary</button-->
-            <!--form action = 'upload_file' class='file-upload'  id = 'upload-form' enctype = 'multipart/form-data'>
-            
-                {% csrf_token %}
-                <input id = 'upload-btn' class = 'btn btn-danger' type = 'submit' value = 'Upload'>
-                <input id = 'upload-image' class = 'file-input' type = 'file' name = 'image'>
-            </form-->
 
-            <center><form action = 'upload_file' id = 'upload-form' enctype = 'multipart/form-data'> 
+            <center>
+
+                <form action = 'upload_file' id = 'upload-form' enctype = 'multipart/form-data'> 
                 
-                {% csrf_token %}
+                    {% csrf_token %}
 
-                <button id = 'upload-button' class = "file-upload btn btn-danger ">            
-                    Start<input id = 'upload-input' type="file" class="file-input" name = 'image'>
-                </button>
+                    <button id = 'upload-button' class = "file-upload btn btn-danger ">Start
+
+                        <input id = 'upload-input' type="file" class="file-input" name = 'image'>
+
+                    </button>
 
                 <!--div class='btn btn-danger file-upload'><input id = 'upload-input' type="file" class="file-input" name = 'image'></div-->
 
-            </form></center>
+                </form>
+
+            </center>
 
         </div>
-
-
 
         <div id = 'process-area'>
 
             <h1 id = 'filename'></h1>
             <h1 id = 'current-version'></h1>      
-            <h1><center><a id = 'process-title' href="image">Image Process</a></center></h1>
+            <h1>
+                <center>
+                    <a id = 'process-title' href="image">Image Process</a>
+                </center>
+            </h1>
 
             <section id = 'tool-bar'>
 
-                 <section class = 'dropdown level-1'>
+               
+                <section class = 'dropdown level-1'>
 
                     <button id = 'Files' class = 'btn dropbtn'>File</button>
 
                     <section class = 'level-2'>
                         
-                        <li class = 'sub'><a id = 'download-link' href = ''>Download</a></li>
+                        <li id = 'undo' class = 'sub'>
+                            Undo
+                        </li>
+
+                        <li id = 'redo' class = 'sub'>
+                            Redo
+                        </li>
+
+
+                        <li id = 'toggle' class = 'sub'>
+                            Toggle
+                        </li>
+
+
+                        <li id = 'reset' class = 'sub'>
+                            Reset
+                        </li>
+
+                        <li>
+                            <a id = 'download-link' href = ''>Download</a>
+                        </li>
+
 
                     </section>
                     
                 </section>
 
                 <section class = 'dropdown level-1'>
+                    
                     <button id = 'tool' class = 'btn dropbtn'>Tool</button>
 
                     <section class = 'level-2'>
    
-                        <li class = 'sub' id = 'binary'>Binary</li>
-               
+                        <li>Binary
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                 <li class = 'value-bar'>
 
+                                   T : <p class = 'values'>128</p>
+                                    <input id = 'binary-threshold'  type = 'range' min = 0 max = 255 value = 128>
+
+                                </li>
+
+                                <li class = 'sub' id = 'binary'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li id = 'otsu' class = 'sub'>
+                            otsu threshold
+                        </li>
+
+                        
+                        <li>Log
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                 <li class = 'value-bar'>
+
+                                   Constant : <p class = 'values'>0.4</p>
+                                    <input id = 'log-constant'  type = 'range' min = 0 max = 1 step = 0.1 value = 0.4>
+
+                                </li>
+
+                                <li class = 'sub' id = 'log'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Powerlaw
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                 <li class = 'value-bar'>
+
+                                   Constant : <p class = 'values'>0.1</p>
+                                    <input id = 'powerlaw-constant'  type = 'range' min = 0 max = 1 step = 0.1 value = 0.1>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                   Gamma : <p class = 'values'>0.4</p>
+                                    <input id = 'powerlaw-gamma'  type = 'range' min = 0 max = 1 step = 0.1 value = 0.4>
+                        
+                                </li>
+
+                                <li class = 'sub' id = 'powerlaw'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+
+                        <li id = 'negative' class = 'sub'>
+                            Negative
+                        </li>
+
+                        <li id = 'fusion' class = 'sub'>
+                            Fusion
+                        </li>
+
+                        <li id = 'fillhole' class = 'sub'>
+                            Fill Hole
+                        </li>
+
+                        <li id = 'histogram' class = 'sub'>
+                            Histogram Equalization
+                        </li>
+
+
+                        <li id = 'PlotHistogram' class = 'sub'>
+                            Plot Histogram
+                        </li>
+
+
+                        
+
+
+   
                     </section>
 
                 </section>
-
                 
                 <section class = 'dropdown level-1'>
                     <button id = 'smooth' class = 'btn dropbtn'>Smooth</button>
@@ -102,7 +208,7 @@
 
                         </li>
 
-                        <li >medianBlur
+                        <li >Median Blur
 
                             <section class = 'dropdown-menu level-3'>
                                  
@@ -110,7 +216,7 @@
 
                                     Kernel  :  <p class = 'values'>3</p>
 
-                                    <input id = 'medianBlur-kernel'  type = 'range' min = 3 max = 11 step = 2 value = 3>
+                                    <input id = 'medianBlur-kernel' class = 'values'  type = 'range' min = 3 max = 11 step = 2 value = 3>
                                 
                                 </li>
 
@@ -120,7 +226,7 @@
 
                         </li>
 
-                        <li>GaussianBlur
+                        <li>Gaussian Blur
 
                             <section class = 'dropdown-menu level-3'>
                                  
@@ -142,8 +248,7 @@
 
                     </section>
 
-                </section>
-
+                </section> 
 
                 <section class = 'dropdown level-1'>
 
@@ -159,21 +264,21 @@
                                  <li class = 'value-bar'>
 
                                     X  :  <p class = 'values'>1</p>
-                                    <input id = 'X'  type = 'range' min = 0 max = 2 value = 1>
+                                    <input id = 'Sobel-X'  type = 'range' min = 0 max = 2 value = 1>
 
                                 </li>
 
                                  <li class = 'value-bar'>
 
                                     Y  :  <p class = 'values'>1</p>
-                                    <input id = 'Y'  type = 'range' min = 0 max = 2 value = 1>
+                                    <input id = 'Sobel-Y'  type = 'range' min = 0 max = 2 value = 1>
 
                                 </li>
 
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Sobel-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
@@ -227,14 +332,14 @@
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Dilation-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
                                 <li class = 'value-bar'>
 
                                     Iteration  :  <p class = 'values'>1</p>
-                                    <input id = 'Iteration' type = 'range' min = 1 max = 10 value = 1>
+                                    <input id = 'Dilation-Iteration' type = 'range' min = 1 max = 10 value = 1>
      
                                 </li>
 
@@ -253,14 +358,14 @@
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Erosion-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
                                 <li class = 'value-bar'>
 
                                     Iteration  :  <p class = 'values'>1</p>
-                                    <input id = 'Iteration' type = 'range' min = 1 max = 10 value = 1>
+                                    <input id = 'Erosion-Iteration' type = 'range' min = 1 max = 10 value = 1>
      
                                 </li>
 
@@ -278,7 +383,7 @@
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Opening-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
@@ -296,7 +401,7 @@
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Closing-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
@@ -315,7 +420,7 @@
                                 <li class = 'value-bar'>
 
                                     Kernel  :  <p class = 'values'>3</p>
-                                    <input id = 'Kernel' type = 'range' min = 1 max = 11 value = 3>
+                                    <input id = 'Morphological-Gradient-Kernel' type = 'range' min = 1 max = 11 value = 3>
      
                                 </li>
 
@@ -332,15 +437,272 @@
                     
                 </section>
 
+                <section class = 'dropdown level-1'>
 
-                <section id = 'undo' class = 'dropdown'>
-                    <button class = 'btn dropbtn'>Undo</button>  
+                    <button id = 'segmentation' class = 'btn dropbtn'>Segment</button>
+
+
+                    <section class = 'level-2'>
+                        <li>Slic
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                <li class = 'value-bar'>
+
+                                    n segments :  <p class = 'values'>5</p>
+                                    <input id = 'slic-n'  type = 'range' min = 0 max = 100 step = 1 value = 5>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    compactness :  <p class = 'values'>1</p>
+                                    <input id = 'slic-compactness'  type = 'range' min = 1 step = 1 max = 100 value = 1>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    sigma :  <p class = 'values'>1</p>
+                                    <input id = 'slic-sigma'  type = 'range' min = 0 
+                                    max = 1 step = 0.1 value = 1>
+
+                                </li>
+
+                                
+
+                                <li class = 'sub' id = 'slic'>Submit</li>
+
+                            </section>
+
+                        </li>
+                        
+                        <li class = 'sub' id = 'watershed'>Watershed</li>
+
+                       
+                        <li>Meanshift
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                <li class = 'value-bar'>
+
+                                    Spatial  :  <p class = 'values'>9</p>
+                                    <input id = 'meanshift-Spatial'  type = 'range' min = 0 max = 300 value = 9>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+                    
+                                    Color  :  <p class = 'values'>20</p>
+                                    <input id = 'meanshift-Color'  type = 'range' min = 0 max = 300 value = 20>
+
+                                </li>
+
+                                <li class = 'sub' id = 'meanshift'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Felzenszwalb
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                <li class = 'value-bar'>
+
+                                    Scale :  <p class = 'values'>1</p>
+                                    <input id = 'felzenszwalb-scale'  type = 'range' min = 0 max = 500 value = 10>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    Sigma :  <p class = 'values'>0.8</p>
+                                    <input id = 'felzenszwalb-sigma'  type = 'range' min = 0 max = 1 step = 0.1 value = 0.8>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    min :  <p class = 'values'>20</p>
+                                    <input id = 'felzenszwalb-min'  type = 'range' min = 0  value = 20>
+
+                                </li>
+
+                                
+
+                                <li class = 'sub' id = 'felzenszwalb'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        
+
+                        <li>Quick Shift
+                        
+                            <section  class = 'dropdown-menu level-3'>
+                                
+                                <li class = 'value-bar'>
+
+                                    kernel :  <p class = 'values'>5</p>
+                                    <input id = 'quickshift-kernel'  type = 'range' min = 3 max = 100 step = 2 value = 5>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    max dist :  <p class = 'values'>10</p>
+                                    <input id = 'quickshift-max-dist'  type = 'range' min = 0 step = 10 max = 500 value = 10>
+                                </li>
+
+                                <li class = 'value-bar'>
+                                    ratio :  <p class = 'values'>1</p>
+                                    <input id = 'quickshift-ratio'  type = 'range' min = 0.1
+                                    max = 1 step = 0.1 value = 1>
+
+                                </li>
+
+                                
+
+                                <li class = 'sub' id = 'quickshift'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+
+                    </section>
+                    
                 </section>
 
+
+                <section class = 'dropdown level-1'>
+
+                    <button id = 'noise' class = 'btn dropbtn'>Noise</button>
+                    <section class = 'level-2'>
+
+                        <li>Gaussian
+                            
+                            <section  class = 'dropdown-menu level-3'>
+                                    
+                                <li class = 'value-bar'>
+
+                                    Mean : <p class = 'values'>0</p>
+                                    <input id = 'gaussian-mean'  type = 'range' min = 0 max = 255 value = 0>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    Deviation : <p class = 'values'>50</p>
+                                    <input id = 'gaussian-deviation'  type = 'range' min = 0 max = 255 value = 50>
+
+                                    </li>
+
+                                <li class = 'sub' id = 'gaussian'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Exponential
+                            
+                            <section  class = 'dropdown-menu level-3'>
+                                    
+                                <li class = 'value-bar'>
+
+                                    Scale : <p class = 'values'>11</p>
+                                    <input id = 'exponential-scale'  type = 'range' min = 0 max = 100 value = 11>
+
+                                    </li>
+
+                                    <li class = 'sub' id = 'exponential'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Gamma
+                            
+                            <section  class = 'dropdown-menu level-3'>
+                                    
+                                <li class = 'value-bar'>
+
+                                    shape: <p class = 'values'>3</p>
+                                    <input id = 'gamma-shape'  type = 'range' min = 1 max = 100 value = 3>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    scale : <p class = 'values'>3</p>
+                                    <input id = 'gamma-scale'  type = 'range' min = 1 max = 100 value = 3>
+
+                                </li>
+
+                                <li class = 'sub' id = 'gamma'>Submit</li>
+
+                            </section>
+
+                        </li>
+
+                        <li>Rayleigh
+                            
+                            <section  class = 'dropdown-menu level-3'>
+                                    
+                                <li class = 'value-bar'>
+
+                                    Scale : <p class = 'values'>13</p>
+                                    <input id = 'rayleigh-scale'  type = 'range' min = 0 max = 100 value = 13>
+
+                                </li>
+
+                                <li class = 'sub' id = 'rayleigh'>Submit</li>
+
+                            </section>
+
+                            </li>
+
+                        <li>Uniform
+
+                            <section  class = 'dropdown-menu level-3'>
+                                    
+                                <li class = 'value-bar'>
+
+                                    Low : <p class = 'values'>0</p>
+                                    <input id = 'uniform-low'  type = 'range' min = -1 max = 1 value = 0>
+
+                                </li>
+
+                                <li class = 'value-bar'>
+
+                                    Heigh : <p class = 'values'>1</p>
+                                    <input id = 'uniform-high'  type = 'range' min = -1 max = 1 value = 1>
+
+                                </li>
+
+                                <li class = 'sub' id = 'uniform'>Submit</li>
+
+                            </section>
+
+                        </li>                    
+                            
+                        <li class = 'sub' id = 'SaltPepper'>Salt and Pepper</li>
+                            
+                    </section>
+                    
+                </section>
+                
+                <!--section id = 'undo' class = 'dropdown'>
+                    <button class = 'btn dropbtn'>Undo</button> 
+                </section>
+
+                <section id = 'redo' class = 'dropdown'>
+                    <button class = 'btn dropbtn'>Redo</button>  
+                </section>
 
                 <section id = 'toggle' class = 'dropdown'>
                     <button class = 'btn dropbtn'>Toggle</button>  
                 </section>
+
+                <section id = 'reset' class = 'dropdown'>
+                    <button class = 'btn dropbtn'>Reset</button>  
+                </section-->
+
+
+
+
 
             </section>
 
@@ -362,19 +724,21 @@
                 <div id = 'processing-image-area'>
                     
                     <img id = 'processing-image' src = '{% static "tmp/2016-05-2815-53-27-310297.png" %}'></img>
+
                 </div>
 
             </div>
 
         </div>
 
-     
-        <script type="text/javascript" src = "{% static 'js/jquery-1.12.4.min.js' %}" defer></script>
-        <script src = "{% static 'js/bootstrap.min.js' %}" defer></script>
-        <script src = "{% static 'js/vendor/jquery.ui.widget.js' %}" defer></script>
-        <script src = "{% static 'js/jquery.iframe-transport.js' %}" defer></script>
-        <script src = "{% static 'js/jquery.fileupload.js' %}" defer></script>
-        <script src = "{% static 'image.js' %}" defer></script>
+        <div>
+            <script src = "{% static 'js/jquery-1.12.4.min.js' %}" defer></script>
+            <script src = "{% static 'js/bootstrap.min.js' %}" defer></script>
+            <script src = "{% static 'js/vendor/jquery.ui.widget.js' %}" defer></script>
+            <script src = "{% static 'js/jquery.iframe-transport.js' %}" defer></script>
+            <script src = "{% static 'js/jquery.fileupload.js' %}" defer></script>
+            <script src = "{% static 'js/image.js' %}" defer></script>
+        </div>
 
     </body>
     

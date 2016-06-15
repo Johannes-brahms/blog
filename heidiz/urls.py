@@ -21,13 +21,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/(?P<title>.*)$', article),
     url(r'^image$', image),
-    
-    url(r'^open$', open_image),
 
-    #url(r'^upload_pic$', upload_pic),
     url(r'^upload_file$', upload_file),
     url(r'^files/(?P<filename>.*)$', files),
-
     url(r'^download$', download),
 
     # opencv function
@@ -43,5 +39,26 @@ urlpatterns = [
     url(r'^closing$', closing),
     url(r'^sobel$', sobel),
     url(r'^Morphological-Gradient$', Morphological_Gradient),
+    url(r'^felzenszwalb$', felzenszwalb),
+    url(r'^grayscale$', grayscale),
+    url(r'^negative$', negative),
+    url(r'^fusion$', fusion),
+    url(r'^slic$', slic),
+    url(r'^quickshift$', quickshift),
+    url(r'^fillhole$', fillhole),
+    url(r'^histogram$', histogram),
+    url(r'^watershed$', watershed),
+    url(r'^log$', log),
+    url(r'^powerlaw$', powerlaw),
+    url(r'^gamma$', gamma),
+    url(r'^gaussian$', gaussian),
+    url(r'^rayleigh$', rayleigh),
+    url(r'^exponential$', exponential),
+    url(r'^uniform$', uniform),
+    url(r'^SaltPepper$', SaltPepper),
+    url(r'^PlotHistogram$', PlotHistogram),
+    url(r'^otsu$', otsu),
+    url(r'^meanshift$', meanshift),
+    #url(r'^$', ),
     #url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
